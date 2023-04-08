@@ -1,4 +1,4 @@
-package com.nttlab.springboot.controller;
+package com.nttlab.springboot.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
