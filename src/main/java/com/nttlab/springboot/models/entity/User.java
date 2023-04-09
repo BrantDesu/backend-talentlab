@@ -1,8 +1,10 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -53,11 +55,8 @@ public class User implements Serializable {
 	private String email;
 
 	@Column(name = "created_at")
-	@Temporal(TemporalType.DATE)
-	@NotNull
-	@PastOrPresent
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createdAt;
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 	
 	public User()
 	{
@@ -120,7 +119,7 @@ public class User implements Serializable {
 		this.role = role;
 	}
 	
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
@@ -129,7 +128,6 @@ public class User implements Serializable {
 		return "User ID = " + idUser + ", rut =" + rut + ", name=" + name + ", lastName=" + lastName + ", role="
 				+ role + ", email=" + email + ", createdAt=" + createdAt + "]";
 	}
-	
 	
 	
 	
