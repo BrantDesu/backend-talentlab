@@ -1,5 +1,120 @@
 package com.nttlab.springboot.models.entity;
 
-public class Product {
+import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
+
+@Entity
+@Table(name = "products")
+public class Product implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idProduct;
+
+	@Column(name = "name")
+	@NotEmpty
+	@Size(min = 2, max = 50)
+	private String name;
+
+	@Column(name = "price")
+	@NotEmpty
+	private int price;
+	
+	@Column(name = "category")
+	@NotEmpty
+	private String category;
+
+	@Column(name = "stock")
+	@NotEmpty
+	private  int stock;
+	
+	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
+	@NotNull
+	@PastOrPresent
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
+	
+	public Product()
+	{
+		
+	}
+
+	public Product(@Size(min = 2, max = 50) String name, int price, String category, int stock) {
+		this.name = name;
+		this.price = price;
+		this.category = category;
+		this.stock = stock;
+	}
+
+	public Long getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(Long idProduct) {
+		this.idProduct = idProduct;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return "Product ID = " + idProduct + ", name=" + name + ", price=" + price + ", category=" + category
+				+ ", stock=" + stock + ", createdAt=" + createdAt;
+	}
+	
+	
 
 }

@@ -65,7 +65,6 @@ public class User implements Serializable {
 	}
 	
 	public User(String name, String lastName, String rut, String email, boolean role) {
-		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.rut = rut;
@@ -119,6 +118,16 @@ public class User implements Serializable {
 
 	public void setRole(boolean role) {
 		this.role = role;
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return "User ID = " + idUser + ", rut =" + rut + ", name=" + name + ", lastName=" + lastName + ", role="
+				+ role + ", email=" + email + ", createdAt=" + createdAt + "]";
 	}
 	
 	
