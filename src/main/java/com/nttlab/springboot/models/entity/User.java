@@ -71,8 +71,6 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
-	@CreationTimestamp
-	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Sale> sales;
@@ -144,7 +142,7 @@ public class User implements Serializable {
 		this.role = role;
 	}
 	
-	public LocalDateTime getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
