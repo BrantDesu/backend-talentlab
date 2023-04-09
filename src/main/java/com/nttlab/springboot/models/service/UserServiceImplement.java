@@ -67,8 +67,8 @@ public class UserServiceImplement implements iUserService{
 
 	@Override
 	@Transactional()
-	public List<User> findByApellido(String apellido) {
-		return userDao.findByApellido(apellido);
+	public List<User> findByApellido(String lastName) {
+		return userDao.findBylastName(lastName);
 	}
 
 }
