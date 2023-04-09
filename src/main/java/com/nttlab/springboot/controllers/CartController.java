@@ -10,7 +10,7 @@ public class CartController {
 	@GetMapping(value= "cartList")
 	public String ProductList(Model model) {
 		model.addAttribute("title","Carrito de Compra");
-		return "cartList";
+		return "cart";
 	}
 	
 }
