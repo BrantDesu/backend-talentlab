@@ -70,7 +70,7 @@ public class User implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Sale> sales;
 
