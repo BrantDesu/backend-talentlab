@@ -3,12 +3,20 @@ package com.nttlab.springboot.models.entity;
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="cart_items")
 public class CartItem implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
+	@Id
 	private Long idCartItem;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

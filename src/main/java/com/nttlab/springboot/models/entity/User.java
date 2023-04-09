@@ -1,22 +1,17 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -25,14 +20,11 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-	
 	
 	private static final long serialVersionUID = 1L;
 
@@ -40,8 +32,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUser;
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="cart_id", nullable = false)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 

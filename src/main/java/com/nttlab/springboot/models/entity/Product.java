@@ -2,7 +2,6 @@ package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
