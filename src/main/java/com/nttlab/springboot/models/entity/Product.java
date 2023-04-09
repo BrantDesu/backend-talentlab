@@ -1,9 +1,10 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,8 +15,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -47,11 +46,8 @@ public class Product implements Serializable {
 	private  int stock;
 	
 	@Column(name = "created_at")
-	@Temporal(TemporalType.DATE)
-	@NotNull
-	@PastOrPresent
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createdAt;
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 	
 	public Product()
 	{
@@ -105,10 +101,10 @@ public class Product implements Serializable {
 		this.stock = stock;
 	}
 	
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
-
+    
 	@Override
 	public String toString() {
 		return "Product ID = " + idProduct + ", name=" + name + ", price=" + price + ", category=" + category

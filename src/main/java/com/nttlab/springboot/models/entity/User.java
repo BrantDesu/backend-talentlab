@@ -1,16 +1,25 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -30,6 +39,11 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUser;
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="cart_id", nullable = false)
+	//@OnDelete(action = OnDeleteAction.CASCADE)
+	private Cart cart;
 
 	@Column(name = "rut", unique = true)
 	@NotEmpty
@@ -53,8 +67,16 @@ public class User implements Serializable {
 	private String email;
 
 	@Column(name = "created_at")
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
+
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Sale> sales;
+
 	
 	@PrePersist
 	private void onCreate() {
@@ -122,7 +144,7 @@ public class User implements Serializable {
 		this.role = role;
 	}
 	
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
@@ -131,7 +153,6 @@ public class User implements Serializable {
 		return "User ID = " + idUser + ", rut =" + rut + ", name=" + name + ", lastName=" + lastName + ", role="
 				+ role + ", email=" + email + ", createdAt=" + createdAt + "]";
 	}
-	
 	
 	
 	
