@@ -9,9 +9,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet" />
-<link
-	href="https://upload.wikimedia.org/wikipedia/commons/5/57/130-man-student-2.svg"
-	rel="icon" type="image/x-icon" />
+<link th:href="@{/img/logo.png}" rel="icon" type="image/x-icon" />
 <link th:href="@{/css/styles.css}" rel=stylesheet type="text/css" />
 
 <title th:text="${titulo}"></title>
@@ -22,7 +20,7 @@
 		<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 			<div class="container">
 				<a class="navbar-brand" th:href="@{/}"> 
-					<img class="img-navbar" src="https:/mante/upload.wikimedia.org/wikipedia/commons/5/57/130-man-student-2.svg" alt="Logo Springboot" />
+					<img class="img-navbar" th:src="@{/img/logo.png}" alt="Logo" />
 				</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
