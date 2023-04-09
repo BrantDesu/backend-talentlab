@@ -48,7 +48,7 @@ public class UserController {
 		
 		if(user.getIdUser() != null) {
 			userService.save(user);
-			return "redirect:/listar";			
+			return "redirect:/userList";			
 		}
 		else {
 			if(userService.findByRut(user.getRut()) != null ) {
@@ -63,7 +63,7 @@ public class UserController {
 			userService.save(user);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);
-			return "redirect:/listar";
+			return "redirect:/userList";
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class UserController {
 			if(user == null) {
 				flash.addFlashAttribute("clase", "danger");
 				flash.addFlashAttribute("error", "El user buscado no se encuentra en nuestros registros");
-				return "redirect:/listar";
+				return "redirect:/userList";
 			}
 			else {
 				model.addAttribute("user", user);
@@ -87,7 +87,7 @@ public class UserController {
 		{
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "Debes ingresar un valor mayor a 0(cero)!!!");
-			return "redirect:/listar";
+			return "redirect:/userList";
 		}
 	}
 	
@@ -98,14 +98,14 @@ public class UserController {
 		if(user == null) {
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "El usuario buscado no se encuentra en nuestros registros");
-			return "redirect:/listar";
+			return "redirect:/userList";
 		}
 		else
 		{
 			userService.delete(id_user);
 			flash.addFlashAttribute("clase", "success");
 			flash.addFlashAttribute("success", "Usuario eliminado con éxito!!!");
-			return "redirect:/listar";
+			return "redirect:/userList";
 		}
 	}
 	

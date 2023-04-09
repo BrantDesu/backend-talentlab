@@ -27,10 +27,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="u: ${user}">
+						<tr th:each="u: ${users}">
 							<td th:text="${u.idUser}"></td>
 							<td th:text="${u.rut}"></td>
-							<td th:text="${u.name} + ' ' + ${a.lastName}"></td>
+							<td th:text="${u.name}"></td>
 							<td th:text="${u.email}"></td>
 							<td>
 								<a class="btn btn-outline-warning" th:href="@{/editar/} + ${u.idUser}">

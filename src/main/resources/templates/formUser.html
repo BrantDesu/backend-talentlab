@@ -46,6 +46,13 @@
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 						</div>
 					</div>
+					<div class="mb-3 row">
+						<label for="role" class="col-sm-2 col-form-label">Rol</label>
+						<div class="col-sm-10">
+							<input th:field="*{role}" type="text" class="form-control">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></small>
+						</div>
+					</div>
 				</div>
 				<div class="card-footer text-center">
 					<div class="form-group">
