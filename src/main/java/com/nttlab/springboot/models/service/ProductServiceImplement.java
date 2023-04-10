@@ -39,13 +39,13 @@ public class ProductServiceImplement implements iProductService{
 	}
 
 	@Override
-	@Transactional()
+	@Transactional
 	public void deleteAll() {
 		productDao.deleteAll();
 	}
 
 	@Override
-	@Transactional()
+	@Transactional
 	public List<Product> findByName(String name) {
 		List<Product> p = productDao.findByName(name);
 		if(!p.isEmpty()) {
