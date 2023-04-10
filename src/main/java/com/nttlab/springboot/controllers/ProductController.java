@@ -24,13 +24,14 @@ public class ProductController {
 	@GetMapping(value= "/product/list")
 	public String ProductList(Model model) {
 		model.addAttribute("title","Listado de Productos");
+		model.addAttribute("products", productService.findAll());
 		return "listProduct";
 	}
 	
 	@GetMapping(value = "/product/new")
 	public String createProduct(Model model) {
 		Product product = new Product();
-		model.addAttribute("producto", product);
+		model.addAttribute("product", product);
 		model.addAttribute("title", "Formulario Creación producto");
 		return "formProduct";
 	}
@@ -47,32 +48,32 @@ public class ProductController {
 		
 		if(product.getIdProduct() != null) {
 			productService.save(product);
-			return "redirect:listProduct";			
+			return "redirect:/product/list";			
 		}
 		else {
 			if(productService.findByName(product.getName()) != null ) {
 				flash.addFlashAttribute("error", "Rut ya registrado en nuestro sistema");
-				return "redirect:formProduct";
+				return "redirect:/product/list";
 			}
 			productService.save(product);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);
-			return "redirect:listProduct";
+			return "redirect:/product/list";
 		}
 	}
 	
 	@GetMapping(value="/product/edit/{id_product}")
-	public String editProduct(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
+	public String editProduct(@PathVariable(value="id_product") Long id_product, Model model, RedirectAttributes flash) {
 		Product product = null;
-		if(id_user > 0) {
-			product = productService.findOne(id_user);
+		if(id_product > 0) {
+			product = productService.findOne(id_product);
 			if(product == null) {
 				flash.addFlashAttribute("clase", "danger");
 				flash.addFlashAttribute("error", "El producto buscado no se encuentra en nuestros registros");
-				return "redirect:listProduct";
+				return "redirect:/product/list";
 			}
 			else {
-				model.addAttribute("producto", product);
+				model.addAttribute("product", product);
 				model.addAttribute("titulo", "Formulario Edición producto");
 				return "formProduct";
 			}
@@ -81,26 +82,27 @@ public class ProductController {
 		{
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "Debes ingresar un valor mayor a 0");
-			return "redirect:listProduct";
+			return "redirect:/product/list";
 		}
 	}
 	
 	
-	@GetMapping(value="/delete/{id_user}")
+	@GetMapping(value="/product/delete/{id_product}")
 	public String deleteProduct(@PathVariable(value="id_product") Long id_product, Model model, RedirectAttributes flash) {
 		Product product = productService.findOne(id_product);
 		if(product == null) {
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "El producto buscado no se encuentra en nuestros registros");
-			return "redirect:listProduct";
+			return "redirect:/product/list";
 		}
 		else
 		{
 			productService.delete(id_product);
 			flash.addFlashAttribute("clase", "success");
 			flash.addFlashAttribute("success", "Producto eliminado con éxito");
-			return "redirect:listProduct";
+			return "redirect:/product/list";
 		}
+
 	}
 
 }

@@ -21,14 +21,14 @@ public class UserController {
 	@Autowired
 	private iUserService userService;
 
-	@GetMapping(value= "userList")
+	@GetMapping(value= "/user/list")
 	public String ProductList(Model model) {
 		model.addAttribute("title","Listado de Usuarios");
 		model.addAttribute("users", userService.findAll());
 		return "listUser";
 	}
 	
-	@GetMapping(value = "/nuevo")
+	@GetMapping(value = "/user/new")
 	public String crearUser(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
@@ -36,7 +36,7 @@ public class UserController {
 		return "formUser";
 	}
 
-	@PostMapping(value = "/form")
+	@PostMapping(value = "/user/form")
 	public String guardarUser(@Valid User user, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 		String mensajeFlash = null;		
@@ -48,26 +48,26 @@ public class UserController {
 		
 		if(user.getIdUser() != null) {
 			userService.save(user);
-			return "redirect:/userList";			
+			return "redirect:/user/list";			
 		}
 		else {
 			if(userService.findByRut(user.getRut()) != null ) {
 				flash.addFlashAttribute("error", "Rut ya registrado en nuestro sistema");
-				return "redirect:/nuevo";
+				return "redirect:/user/new";
 			}
 			else if(userService.findByEmail(user.getEmail()) != null) {
 				flash.addFlashAttribute("error", "Email ya registrado en nuestro sistema");
-				return "redirect:/nuevo";
+				return "redirect:/user/new";
 			}
 			
 			userService.save(user);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);
-			return "redirect:/userList";
+			return "redirect:/user/list";
 		}
 	}
 	
-	@GetMapping(value="/editar/{id_user}")
+	@GetMapping(value="/user/edit/{id_user}")
 	public String editarUser(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
 		User user = null;
 		if(id_user > 0) {
@@ -75,37 +75,37 @@ public class UserController {
 			if(user == null) {
 				flash.addFlashAttribute("clase", "danger");
 				flash.addFlashAttribute("error", "El user buscado no se encuentra en nuestros registros");
-				return "redirect:/userList";
+				return "redirect:/user/list";
 			}
 			else {
 				model.addAttribute("user", user);
 				model.addAttribute("titulo", "Formulario Edición usuario ");
-				return "form";
+				return "formUser";
 			}
 		}
 		else
 		{
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "Debes ingresar un valor mayor a 0(cero)!!!");
-			return "redirect:/userList";
+			return "redirect:/user/list";
 		}
 	}
 	
 	
-	@GetMapping(value="/eliminar/{id_user}")
+	@GetMapping(value="/user/delete/{id_user}")
 	public String eliminarUser(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
 		User user = userService.findOne(id_user);
 		if(user == null) {
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "El usuario buscado no se encuentra en nuestros registros");
-			return "redirect:/userList";
+			return "redirect:/user/list";
 		}
 		else
 		{
 			userService.delete(id_user);
 			flash.addFlashAttribute("clase", "success");
 			flash.addFlashAttribute("success", "Usuario eliminado con éxito!!!");
-			return "redirect:/userList";
+			return "redirect:/user/list";
 		}
 	}
 	

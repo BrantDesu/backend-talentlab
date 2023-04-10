@@ -7,11 +7,15 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -24,6 +28,11 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProduct;
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="cart_item_id")
+	//@OnDelete(action = OnDeleteAction.CASCADE)
+	private CartItem cartItem;
 
 	@Column(name = "name")
 	@NotEmpty
@@ -31,7 +40,7 @@ public class Product implements Serializable {
 	private String name;
 
 	@Column(name = "price")
-	@NotEmpty
+	@NotNull
 	private int price;
 	
 	@Column(name = "category")
@@ -39,8 +48,8 @@ public class Product implements Serializable {
 	private String category;
 
 	@Column(name = "stock")
-	@NotEmpty
-	private  int stock;
+	@NotNull
+	private int stock;
 	
 	@Column(name = "created_at")
 	@CreationTimestamp
