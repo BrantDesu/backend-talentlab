@@ -31,16 +31,18 @@ public class Cart implements Serializable{
 	@Column(name="total")
 	private int total;
 	
-	@OneToMany(mappedBy = "cart_items")
-	private List<CartItem> cartItems;
+	@Column(name = "active")
+	private boolean active;
 	
 	public Cart() {
 		
 	}
 
-	public Cart(User user, int total) {
+	public Cart(User user, int total, boolean active) {
+		super();
 		this.user = user;
 		this.total = total;
+		this.active = active;
 	}
 
 	public User getUser() {
@@ -63,7 +65,12 @@ public class Cart implements Serializable{
 		return idCart;
 	}
 	
-	
-	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 }

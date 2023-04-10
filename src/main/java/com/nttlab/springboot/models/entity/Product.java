@@ -28,11 +28,6 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProduct;
-	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="cart_item_id")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
-	private CartItem cartItem;
 
 	@Column(name = "name")
 	@NotEmpty
