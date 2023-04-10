@@ -1,6 +1,7 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +30,9 @@ public class Cart implements Serializable{
 	
 	@Column(name="total")
 	private int total;
+	
+	@OneToMany(mappedBy = "cart_items")
+	private List<CartItem> cartItems;
 	
 	public Cart() {
 		
