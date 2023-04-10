@@ -63,17 +63,17 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/product/edit/{id_product}")
-	public String editProduct(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
+	public String editProduct(@PathVariable(value="id_product") Long id_product, Model model, RedirectAttributes flash) {
 		Product product = null;
-		if(id_user > 0) {
-			product = productService.findOne(id_user);
+		if(id_product > 0) {
+			product = productService.findOne(id_product);
 			if(product == null) {
 				flash.addFlashAttribute("clase", "danger");
 				flash.addFlashAttribute("error", "El producto buscado no se encuentra en nuestros registros");
 				return "redirect:/product/list";
 			}
 			else {
-				model.addAttribute("producto", product);
+				model.addAttribute("product", product);
 				model.addAttribute("titulo", "Formulario Edición producto");
 				return "formProduct";
 			}
