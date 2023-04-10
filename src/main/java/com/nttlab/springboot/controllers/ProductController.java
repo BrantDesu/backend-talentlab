@@ -10,7 +10,7 @@ public class ProductController {
 	@GetMapping(value= "productList")
 	public String ProductList(Model model) {
 		model.addAttribute("title","Listado de Productos");
-		return "productList";
+		return "listProduct";
 	}
 
 }
