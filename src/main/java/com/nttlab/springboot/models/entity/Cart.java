@@ -29,6 +29,19 @@ public class Cart implements Serializable{
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	
+	@OneToMany(mappedBy = "cart")
+	//@JoinColumn(name = "id_user")
+	//@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<CartItem> cart_items;
+	
+	public List<CartItem> getCart_items() {
+		return cart_items;
+	}
+
+	public void setIdCart(Long idCart) {
+		this.idCart = idCart;
+	}
+
 	@Column(name="total")
 	private int total = 0;
 	

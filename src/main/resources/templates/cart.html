@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
 <body>
+	
+	<header th:replace="layout/layout :: header"></header>
+		
+	<main>
+		<div class="album py-5 bg-light">
+        	<div class="container" th:each="ci: ${cart.cart_items}">
+        		<h4 th:text="'CartItem: ' + ${ci.product.name} + ', quantity ' + ${ci.quantity}"></h4>
+        	</div>
+        
+        </div>
+	</main>
+	
 
 </body>
 </html>

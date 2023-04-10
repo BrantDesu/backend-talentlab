@@ -54,6 +54,8 @@ public class CartItemController {
 		Cart cart = cartService.findOne(cart_id);
 		int total = product.getPrice();
 		
+		System.out.println(cart.getCart_items());
+		
 		CartItem cartItem = new CartItem(cart, product, 1, total);
 
 		cartItemService.save(cartItem);

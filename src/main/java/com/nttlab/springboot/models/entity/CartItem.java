@@ -23,8 +23,8 @@ public class CartItem implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCartItem;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="cart_id", nullable = false)
+	@ManyToOne
+	//@JoinColumn(name="cart_id", nullable = false)
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 	
