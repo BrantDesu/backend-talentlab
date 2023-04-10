@@ -10,7 +10,7 @@
 			<div class="row mt-4">
 				<h1 class="text-primary" th:text="${title}"></h1>
 				<div class="col-sm-2">
-					<a class="btn btn-outline-primary" th:href="@{/nuevo}">Crear nuevo</a>
+					<a class="btn btn-outline-primary" th:href="@{/user/new}">Crear nuevo</a>
 				</div>
 			</div>
 			<div class="row mt-4">
@@ -33,12 +33,12 @@
 							<td th:text="${u.name}"></td>
 							<td th:text="${u.email}"></td>
 							<td>
-								<a class="btn btn-outline-warning" th:href="@{/editar/} + ${u.idUser}">
+								<a class="btn btn-outline-warning" th:href="@{/user/edit/} + ${u.idUser}">
 									<span class="fs-5">
 										<i class="fa-solid fa-pen-to-square"></i>
 									</span>
 								</a>
-								<a class="btn btn-outline-danger" th:href="@{/eliminar/} + ${u.idUser}" onclick="return confirm('Estas seguro que deseas eliminar al usuario. Estas acción no se puede deshacer?');">
+								<a class="btn btn-outline-danger" th:href="@{/user/delete/} + ${u.idUser}" onclick="return confirm('Estas seguro que deseas eliminar al usuario. Estas acción no se puede deshacer?');">
 									<span class="fs-5">
 										<i class="fa-solid fa-trash-can"></i>
 									</span>

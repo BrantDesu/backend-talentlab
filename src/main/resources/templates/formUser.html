@@ -12,7 +12,7 @@
 			</ul>
 		</div>
 	
-		<form th:action="@{/form}" th:object="${user}" method="POST">
+		<form th:action="@{/user/form}" th:object="${user}" method="POST">
 			<div class="card">
 				<div class="card-header">
 					<h4 class="card-title" th:text="${title}"></h4>
@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<input type="submit" value="Guardar" class="btn btn-outline-primary" />
 						<input type="reset" value="Limpiar" class="btn btn-outline-warning" onclick="this.form.reset();" />
-						<a type="button" class="btn btn-outline-secondary" th:href="@{/userList}">Volver</a>
+						<a type="button" class="btn btn-outline-secondary" th:href="@{/user/list}">Volver</a>
 					</div>
 				</div>	
 			</div>

@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -31,7 +32,7 @@ public class Product implements Serializable {
 	private String name;
 
 	@Column(name = "price")
-	@NotEmpty
+	@NotNull
 	private int price;
 	
 	@Column(name = "category")
@@ -39,8 +40,8 @@ public class Product implements Serializable {
 	private String category;
 
 	@Column(name = "stock")
-	@NotEmpty
-	private  int stock;
+	@NotNull
+	private int stock;
 	
 	@Column(name = "created_at")
 	@CreationTimestamp
