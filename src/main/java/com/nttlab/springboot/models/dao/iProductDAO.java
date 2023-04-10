@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.nttlab.springboot.models.entity.Product;
 
+
 public interface iProductDAO extends CrudRepository<Product, Long> {
 	
 	@Query("select p from Product p where p.name like %?1%")

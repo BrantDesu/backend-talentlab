@@ -22,7 +22,7 @@
                   <p class="card-text" th:text="'Stock: ' + ${p.stock}"></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      	<a class="btn--bs-primary"   th:href="@{/product/edit/} + ${p.idProduct}">
+                      	<a class="btn--bs-primary" th:href="@{/cart-item/create/} + '1' + '/' + ${p.idProduct}">
 							<span class="fs-5">
 								<i class="fas fa-shopping-cart"></i>
 							</span>

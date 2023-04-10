@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -32,7 +32,8 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUser;
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "id_cart")
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 
