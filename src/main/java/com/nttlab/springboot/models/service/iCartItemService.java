@@ -11,7 +11,7 @@ import com.nttlab.springboot.models.entity.CartItem;
 @Repository
 public interface iCartItemService {
 	
-	public List<CartItem> findAll(Long id);
+	public List<CartItem> findAll();
 	
     public CartItem findOne(Long id);
     

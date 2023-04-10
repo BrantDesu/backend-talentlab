@@ -18,7 +18,7 @@ public class CartItemServiceImplement implements iCartItemService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<CartItem> findAll(Long id) {
+	public List<CartItem> findAll() {
 		return (List<CartItem>) cartItemDao.findAll();
 	}
 
