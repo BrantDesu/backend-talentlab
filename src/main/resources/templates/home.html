@@ -21,13 +21,63 @@
                   <p class="card-text" th:text="'Categoria: ' + ${p.category}"></p>
                   <p class="card-text" th:text="'Stock: ' + ${p.stock}"></p>
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
+                    
+                    <!--<form th:action="@{/cart-item/create/} + '1' + '/' + ${p.idProduct}" method="POST" th:object="${cartItem}">
+                    
+                    <input th:field="{quantity}" type="text" class="form-control">
+                    
+                    
+                    
+                    <div class="form-group">
+					
+                    	<input type="submit" value="Guardar" class="btn btn-outline-primary" />-->
+                    	
                       	<a class="btn--bs-primary" th:href="@{/cart-item/create/} + '1' + '/' + ${p.idProduct}">
 							<span class="fs-5">
 								<i class="fas fa-shopping-cart"></i>
 							</span>
 						</a>
-                    </div>
+						
+						<!-- Button trigger modal 
+						<button class="btn btn-primary" data-toggle="modal" th:data-target="'#addToCartModal'+${p.idProduct}">
+							<span class="fs-5">
+								<i class="fas fa-shopping-cart"></i>
+							</span>
+						</button>-->
+						
+                    <!--</div>
+                    
+					</form>-->
+					
+					<!-- Modal 
+					<div class="modal fade" th:id="'addToCartModal'+${p.idProduct}" tabindex="-1" role="dialog" aria-labelledby="addToCartModal"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Agregar al carrito</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form th:action="@{/cart-item/create/} + '1' + '/' + ${p.idProduct}" method="post">
+									<div class="modal-body">
+					
+										<input type="hidden" name="idProduct" th:value=${p.idProduct} />
+										<input type="number" name="quantity" class="form-control" />
+					
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+										<input type="submit" value="Guardar" class="btn btn-outline-primary" />
+									</div>
+					
+								</form>
+					
+							</div>
+						</div>
+					</div>-->
+                    
                     <small class="text-muted" th:text=" 'Valor: $ ' + ${p.price}" ></small>
                   </div>
                 </div>
