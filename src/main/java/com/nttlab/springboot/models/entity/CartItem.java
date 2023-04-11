@@ -86,7 +86,11 @@ public class CartItem implements Serializable {
 		this.total = total;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "CartItem [idCartItem=" + idCartItem + ", cart=" + cart + ", product=" + product + ", quantity="
+				+ quantity + ", total=" + total + "]";
+	}
 	
 
 }

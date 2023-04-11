@@ -1,6 +1,7 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -90,4 +91,12 @@ public class Cart implements Serializable{
 		this.active = active;
 	}
 
+	public int calculateCartTotal() {
+		int total = 0;
+		for (CartItem cartItem : cart_items) {
+			total += cartItem.getQuantity() * cartItem.getTotal();
+		}
+		this.total = total;
+		return total;
+	}
 }
