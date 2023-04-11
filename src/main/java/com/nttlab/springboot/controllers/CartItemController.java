@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,22 +56,24 @@ public class CartItemController {
 	}
 
 	@PostMapping(value = { "/cart-item/edit" })
-	public String editCartItem(@Valid CartItem cartItem,
+	public String editCartItem(@RequestParam(name="id_cart_item") Long cartItemId, @RequestParam(name="quantity") Integer quantity, //Integer porque pueden llegar null
 			RedirectAttributes flash, SessionStatus status) {
-
+		CartItem cartItem = cartItemService.findOne(cartItemId);
 		System.out.println(cartItem);
-		
-		//cartItemService.save(cartItem);
-		return "redirect:/cart/";
+		// editar
+		cartItem.setQuantity(quantity);
+		cartItemService.save(cartItem);
+		return "redirect:/cart/" + cartItem.getCart().getIdCart();
 	}
 	
 //	@PostMapping(value = { "/cart-item/delete/{cart_item_id}" })
 //	public String deleteCartItem(@PathVariable(value = "cart_item_id") Long cart_item_id,
 	@PostMapping(value = { "/cart-item/delete" })
-	public String deleteCartItem(@Valid CartItem cartItem,
+	public String deleteCartItem(@RequestParam(name="id_cart_item") Long cartItemId,
 			RedirectAttributes flash, SessionStatus status) {
+		CartItem cartItem = cartItemService.findOne(cartItemId);
 		cartItemService.delete(cartItem);
-		return "redirect:/cart/";
+		return "redirect:/cart/" + cartItem.getCart().getIdCart();
 	}
 
 }

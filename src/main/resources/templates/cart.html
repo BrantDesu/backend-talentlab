@@ -29,7 +29,7 @@
         </div>
 
         <div class="card rounded-3 mb-4"  th:each="ci: ${cart.cart_items}">
-			<form th:action="@{/cart-item/edit}" th:object="${cartItem}" method="POST">
+			<form th:action="@{/cart-item/edit}" method="POST">
 			  <div class="card-body p-4">
 	            <div class="row d-flex justify-content-between align-items-center">
 	              <div class="col-md-2 col-lg-2 col-xl-2">
@@ -38,33 +38,35 @@
 	                  class="img-fluid rounded-3" alt="Cotton T-shirt">
 	              </div>
 	              <div class="col-md-3 col-lg-3 col-xl-3">
-	                <p class="lead fw-normal mb-2" th:text="'CartItem (' + ${ci.idCartItem} + '): ' + ${ci.product.name} + ', quantity ' + ${ci.quantity}"></p>
+	                <p class="lead fw-normal mb-2" th:text="${ci.product.name}"></p>
 	                <p><span class="text-muted" th:text="'Categoria: ' + ${ci.product.category}"></span></p>
 	              </div>
 	              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-	                <button class="btn btn-link px-2"
+	                <button type="submit" class="btn btn-link px-2"
 	                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
 	                  <i class="fas fa-minus"></i>
 	                </button>
 	
-	                <input th:field="*{quantity}" id="form1" min="0" name="quantity" th:value="${ci.quantity}" type="text"
+	                <input th:value="${ci.quantity}" id="form1" min="0" name="quantity" type="number" readonly
 	                  class="form-control form-control-sm" />
 	
-	                <button class="btn btn-link px-2"
+	                <button type="submit" class="btn btn-link px-2"
 	                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
 	                  <i class="fas fa-plus"></i>
 	                </button>
 	              </div>
 	              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-	                <h5 class="mb-0" th:text=" '$' + ${ci.product.price}"></h5>
+	                <h5 class="mb-0" th:text=" '$' + ${ci.product.price * ci.quantity} "></h5>
 	              </div>
 	              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-	                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+	                <button th:formaction="@{/cart-item/delete}" class="btn btn-outline-danger"><i class="fas fa-trash fa-lg"></i></button>
 	              </div>
-		          <input type="text" th:field="*{idCartItem}" placeholder="asd">
+	              
+	          		
+	          		
 	            </div>
 	          </div>
-	          <input type="submit" value="Guardar" class="btn btn-outline-primary" />
+	          <input name="id_cart_item" type="hidden" th:value="${ci.idCartItem}" />
 			</form>
         </div>
 
