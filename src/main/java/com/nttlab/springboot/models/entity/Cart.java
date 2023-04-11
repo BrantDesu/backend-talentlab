@@ -99,4 +99,11 @@ public class Cart implements Serializable{
 		this.total = total;
 		return total;
 	}
+
+	@Override
+	public String toString() {
+		return "Cart [idCart=" + idCart + ", user=" + user + ", cart_items=" + cart_items + ", total=" + total
+				+ ", active=" + active + "]";
+	}
+	
 }
