@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,10 +33,10 @@ public class Sale implements Serializable {
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="product_id", nullable = false)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="cart_id")
 	//@OnDelete(action = OnDeleteAction.CASCADE)
-	private Product product;
+	private Cart cart;
 	
 	@Column(name = "created_at")
 	@CreationTimestamp
@@ -48,9 +49,9 @@ public class Sale implements Serializable {
 		
 	}
 
-	public Sale(User user, Product product, int total) {
+	public Sale(User user, Cart cart, int total) {
 		this.user = user;
-		this.product = product;
+		this.cart = cart;
 		this.total = total;
 	}
 
@@ -66,12 +67,12 @@ public class Sale implements Serializable {
 		this.user = user;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	public LocalDateTime getCreatedAt() {
