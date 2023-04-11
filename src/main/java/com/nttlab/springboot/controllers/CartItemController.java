@@ -29,39 +29,48 @@ public class CartItemController {
 
 	@Autowired
 	private iProductService productService;
-	
+
 	@Autowired
 	private iCartService cartService;
 
-	@PostMapping(value = { "/cart-item/create" })
-	public String saveCartItem(Model model) {
-
-		model.addAttribute("titulo", "Macro Plei");
-		model.addAttribute("cartItems", cartItemService.findAll());
-		return "home";
-	}
-
 	@GetMapping(value = { "/cart-item/create/{cart_id}/{product_id}" })
 	public String saveCartItem(@PathVariable(value = "cart_id") Long cart_id,
-			@PathVariable(value = "product_id") Long product_id,
-			RedirectAttributes flash, SessionStatus status) {
-		//String mensajeFlash = null;
-		
+			@PathVariable(value = "product_id") Long product_id, RedirectAttributes flash, SessionStatus status) {
+
 		List<Product> list = productService.findAll();
 		System.out.println(list);
-		
+
 		Product product = productService.findOne(product_id);
 		Cart cart = cartService.findOne(cart_id);
 		int total = product.getPrice();
-		
+
 		System.out.println(cart.getCart_items());
-		
+
 		CartItem cartItem = new CartItem(cart, product, 1, total);
 
 		cartItemService.save(cartItem);
 
 		return "redirect:/";
 
+	}
+
+	@PostMapping(value = { "/cart-item/edit" })
+	public String editCartItem(@Valid CartItem cartItem,
+			RedirectAttributes flash, SessionStatus status) {
+
+		System.out.println(cartItem);
+		
+		//cartItemService.save(cartItem);
+		return "redirect:/cart/";
+	}
+	
+//	@PostMapping(value = { "/cart-item/delete/{cart_item_id}" })
+//	public String deleteCartItem(@PathVariable(value = "cart_item_id") Long cart_item_id,
+	@PostMapping(value = { "/cart-item/delete" })
+	public String deleteCartItem(@Valid CartItem cartItem,
+			RedirectAttributes flash, SessionStatus status) {
+		cartItemService.delete(cartItem);
+		return "redirect:/cart/";
 	}
 
 }
