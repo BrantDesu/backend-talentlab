@@ -10,7 +10,7 @@ import java.util.List;
 public interface iProductService {
 	public List<Product> findAll();
 	
-	public void save(Product product);
+	public Product save(Product product);
 	
 	public Product findOne(Long id);
 	
@@ -21,4 +21,6 @@ public interface iProductService {
 	public List<Product> findByName(String name);
 	
 	public List<Product> findByCategory(String category);
+
+
 }

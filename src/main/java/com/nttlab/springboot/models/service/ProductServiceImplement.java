@@ -22,8 +22,8 @@ public class ProductServiceImplement implements iProductService{
 
 	@Override
 	@Transactional
-	public void save(Product product) {
-		productDao.save(product);
+	public Product save(Product product) {
+		return productDao.save(product);
 	}
 
 	@Override
@@ -62,4 +62,5 @@ public class ProductServiceImplement implements iProductService{
 		}
 		return null;
 	}
+
 }
