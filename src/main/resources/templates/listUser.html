@@ -14,9 +14,9 @@
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div th:if="${users.isEmpty()}" class="alert alert-primary"
+				<div th:if="${clients.isEmpty()}" class="alert alert-primary"
 					role="alert">No hay usuarios en la lista para mostrar...</div>
-				<table th:if="${!users.isEmpty()}"
+				<table th:if="${!clients.isEmpty()}"
 					class="table table-bordered table-striped">
 					<thead class="table-dark">
 						<tr>
@@ -24,14 +24,16 @@
 							<th>Rut</th>
 							<th>Nombre</th>
 							<th>Email</th>
+							<th>Rol</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="u: ${users}">
+						<tr th:each="u: ${clients}">
 							<td th:text="${u.idUser}"></td>
 							<td th:text="${u.rut}"></td>
 							<td th:text="${u.name} + ' ' +${u.lastName}"></td>
 							<td th:text="${u.email}"></td>
+							<td th:text="${u.authority}"></td>
 							<td>
 								<a class="btn btn-outline-warning" th:href="@{/user/edit/} + ${u.idUser}">
 									<span class="fs-5">

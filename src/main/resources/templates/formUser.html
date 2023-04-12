@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="~{layout/layout :: head}"></head>
 <body>
 	
-	<header th:replace="layout/layout :: header"></header>
+	<header th:replace="~{layout/layout :: header}"></header>
 
 	<div class="container mt-4">
-		<div class="alert alert-danger py-5" th:object="${user}" th:remove="tag">
+		<div class="alert alert-danger py-5" th:object="${client}" th:remove="tag">
 			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
 				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
 			</ul>
 		</div>
 	
-		<form th:action="@{/user/form}" th:object="${user}" method="POST">
+		<form th:action="@{/user/form}" th:object="${client}" method="POST">
 			<div class="card">
 				<div class="card-header">
 					<h4 class="card-title" th:text="${title}"></h4>
@@ -47,10 +47,10 @@
 						</div>
 					</div>
 					<div class="mb-3 row">
-						<label for="role" class="col-sm-2 col-form-label">Rol</label>
+						<label for="authority" class="col-sm-2 col-form-label">Rol</label>
 						<div class="col-sm-10">
-							<input th:field="*{role}" type="text" class="form-control">
-							<small class="form-text text-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></small>
+							<input th:field="*{authority}" type="text" class="form-control">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></small>
 						</div>
 					</div>
 				</div>
@@ -58,14 +58,14 @@
 					<div class="form-group">
 						<input type="submit" value="Guardar" class="btn btn-outline-primary" />
 						<input type="reset" value="Limpiar" class="btn btn-outline-warning" onclick="this.form.reset();" />
-						<a type="button" class="btn btn-outline-secondary" th:href="@{/user/list}">Volver</a>
+						<a type="button" class="btn btn-outline-secondary" th:href="@{/clients/list}">Volver</a>
 					</div>
 				</div>	
 			</div>
-			<input type="hidden" th:field="*{idUser}">
+			
 		</form>
 	</div>
 
-	<footer th:replace="layout/layout :: footer"></footer>
+	<footer th:replace="~{layout/layout :: footer}"></footer>
 </body>
 </html>

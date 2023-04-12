@@ -77,7 +77,7 @@ public class ProductController {
 			}
 			else {
 				model.addAttribute("product", product);
-				model.addAttribute("titulo", "Formulario Edición producto");
+				model.addAttribute("title", "Formulario Edición producto");
 				return "formProduct";
 			}
 		}
