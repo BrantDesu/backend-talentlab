@@ -4,25 +4,27 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.nttlab.springboot.models.entity.User;
+import com.nttlab.springboot.models.entity.Client;
 
 @Repository
 public interface iUserService {
 	
-	public List<User> findAll();
+	public List<Client> findAll();
 	
-	public void save(User user);
+	public void save(Client client);
 	
-	public User findOne(Long id);
+	public Client findOne(Long id);
 	
 	public void delete(Long id);
 	
 	public void deleteAll();
 	
-	public User findByRut(String rut);
+	public Client findByName(String name);
 	
-	public User findByEmail(String email);
+	public Client findByRut(String rut);
 	
-	public List<User> findByApellido(String apellido);
+	public Client findByEmail(String email);
+	
+	public List<Client> findByApellido(String apellido);
 
 }

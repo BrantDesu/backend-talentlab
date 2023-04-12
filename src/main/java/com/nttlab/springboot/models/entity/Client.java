@@ -23,8 +23,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "clients")
+public class Client implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -51,13 +51,18 @@ public class User implements Serializable {
 	@Size(min = 2, max = 50)
 	private String lastName;
 	
-	@Column(name = "role")
-	private boolean role;
+	@Column(name = "authority")
+	private String authority;
 
 	@Email
 	@NotEmpty
 	private String email;
 
+	@Column(length = 255)
+	@NotEmpty
+	private String password;
+	
+	
 	@Column(name = "created_at")
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -68,17 +73,24 @@ public class User implements Serializable {
 		createdAt = new Date();
 	}
 	
-	public User()
+	public Client()
 	{
 		
 	}
 	
-	public User(String name, String lastName, String rut, String email, boolean role) {
+	
+
+	public Client(Cart cart, @NotEmpty String rut, @NotEmpty @Size(min = 2, max = 50) String name,
+			@NotEmpty @Size(min = 2, max = 50) String lastName, String authority, @Email @NotEmpty String email,
+			@NotEmpty String password) {
+		super();
+		this.cart = cart;
+		this.rut = rut;
 		this.name = name;
 		this.lastName = lastName;
-		this.rut = rut;
+		this.authority = authority;
 		this.email = email;
-		this.role = role;
+		this.password = password;
 	}
 
 	public Long getIdUser() {
@@ -121,23 +133,45 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public boolean isRole() {
-		return role;
+	
+	
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setRole(boolean role) {
-		this.role = role;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
-	
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "User ID = " + idUser + ", rut =" + rut + ", name=" + name + ", lastName=" + lastName + ", role="
-				+ role + ", email=" + email + ", createdAt=" + createdAt + "]";
+		return "Client [idUser=" + idUser + ", cart=" + cart + ", rut=" + rut + ", name=" + name + ", lastName="
+				+ lastName + ", authority=" + authority + ", email=" + email + ", password=" + password + ", createdAt="
+				+ createdAt + "]";
 	}
+	
+	
+	
 	
 	
 	

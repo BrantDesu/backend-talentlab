@@ -4,16 +4,18 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.nttlab.springboot.models.entity.User;
+import com.nttlab.springboot.models.entity.Client;
 
-public interface iUserDAO extends CrudRepository<User, Long>{
+public interface iUserDAO extends CrudRepository<Client, Long>{
 
 	@Query("select u from User u where u.rut like %?1%")
-	public User findByRut(String rut);
+	public Client findByRut(String rut);
 	
-	public User findByEmail(String email);
+	public Client findByEmail(String email);
 	
-	public List<User> findBylastName(String lastName);
+	public Client findByName(String name);
+	
+	public List<Client> findBylastName(String lastName);
 	
 	
 }
