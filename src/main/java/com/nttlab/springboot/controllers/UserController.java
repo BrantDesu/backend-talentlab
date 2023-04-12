@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.nttlab.springboot.models.entity.User;
+import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.service.iUserService;
 
 import jakarta.validation.Valid;
@@ -30,14 +30,14 @@ public class UserController {
 	
 	@GetMapping(value = "/user/new")
 	public String crearUser(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		Client client = new Client();
+		model.addAttribute("user", client);
 		model.addAttribute("title", "Formulario Creación usuario");
 		return "formUser";
 	}
 
 	@PostMapping(value = "/user/form")
-	public String guardarUser(@Valid User user, BindingResult result, Model model, RedirectAttributes flash,
+	public String guardarUser(@Valid Client client, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 		String mensajeFlash = null;		
 		if(result.hasErrors()) {
@@ -46,21 +46,21 @@ public class UserController {
 		}
 		
 		
-		if(user.getIdUser() != null) {
-			userService.save(user);
+		if(client.getIdUser() != null) {
+			userService.save(client);
 			return "redirect:/user/list";			
 		}
 		else {
-			if(userService.findByRut(user.getRut()) != null ) {
+			if(userService.findByRut(client.getRut()) != null ) {
 				flash.addFlashAttribute("error", "Rut ya registrado en nuestro sistema");
 				return "redirect:/user/new";
 			}
-			else if(userService.findByEmail(user.getEmail()) != null) {
+			else if(userService.findByEmail(client.getEmail()) != null) {
 				flash.addFlashAttribute("error", "Email ya registrado en nuestro sistema");
 				return "redirect:/user/new";
 			}
 			
-			userService.save(user);
+			userService.save(client);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);
 			return "redirect:/user/list";
@@ -69,16 +69,16 @@ public class UserController {
 	
 	@GetMapping(value="/user/edit/{id_user}")
 	public String editarUser(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
-		User user = null;
+		Client client = null;
 		if(id_user > 0) {
-			user = userService.findOne(id_user);
-			if(user == null) {
+			client = userService.findOne(id_user);
+			if(client == null) {
 				flash.addFlashAttribute("clase", "danger");
 				flash.addFlashAttribute("error", "El user buscado no se encuentra en nuestros registros");
 				return "redirect:/user/list";
 			}
 			else {
-				model.addAttribute("user", user);
+				model.addAttribute("user", client);
 				model.addAttribute("titulo", "Formulario Edición usuario ");
 				return "formUser";
 			}
@@ -94,8 +94,8 @@ public class UserController {
 	
 	@GetMapping(value="/user/delete/{id_user}")
 	public String eliminarUser(@PathVariable(value="id_user") Long id_user, Model model, RedirectAttributes flash) {
-		User user = userService.findOne(id_user);
-		if(user == null) {
+		Client client = userService.findOne(id_user);
+		if(client == null) {
 			flash.addFlashAttribute("clase", "danger");
 			flash.addFlashAttribute("error", "El usuario buscado no se encuentra en nuestros registros");
 			return "redirect:/user/list";

@@ -31,7 +31,7 @@ public class Sale implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="user_id", nullable = false)
 	//@OnDelete(action = OnDeleteAction.CASCADE)
-	private User user;
+	private Client client;
 	
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="cart_id")
@@ -49,8 +49,8 @@ public class Sale implements Serializable {
 		
 	}
 
-	public Sale(User user, Cart cart, int total) {
-		this.user = user;
+	public Sale(Client client, Cart cart, int total) {
+		this.client = client;
 		this.cart = cart;
 		this.total = total;
 	}
@@ -59,12 +59,12 @@ public class Sale implements Serializable {
 		return idSale;
 	}
 
-	public User getUser() {
-		return user;
+	public Client getUser() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Client client) {
+		this.client = client;
 	}
 
 	public Cart getCart() {

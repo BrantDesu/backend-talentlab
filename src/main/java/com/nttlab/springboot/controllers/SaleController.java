@@ -16,7 +16,7 @@ import com.nttlab.springboot.models.entity.Cart;
 import com.nttlab.springboot.models.entity.CartItem;
 import com.nttlab.springboot.models.entity.Product;
 import com.nttlab.springboot.models.entity.Sale;
-import com.nttlab.springboot.models.entity.User;
+import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.service.iCartService;
 import com.nttlab.springboot.models.service.iSaleService;
 import com.nttlab.springboot.models.service.iUserService;

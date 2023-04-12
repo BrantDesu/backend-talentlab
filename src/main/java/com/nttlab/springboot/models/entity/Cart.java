@@ -1,10 +1,7 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +25,7 @@ public class Cart implements Serializable{
 	@OneToOne//(mappedBy = "cart", cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user")
 	//@OnDelete(action = OnDeleteAction.CASCADE)
-	private User user;
+	private Client client;
 	
 	@OneToMany(mappedBy = "cart")
 	//@JoinColumn(name = "id_user")
@@ -53,22 +50,22 @@ public class Cart implements Serializable{
 		
 	}
 
-	public Cart(User user) {
-		this.user = user;
+	public Cart(Client client) {
+		this.client = client;
 	}
 	
-	public Cart(User user, int total, boolean active) {
-		this.user = user;
+	public Cart(Client client, int total, boolean active) {
+		this.client = client;
 		this.total = total;
 		this.active = active;
 	}
 
-	public User getUser() {
-		return user;
+	public Client getUser() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Client client) {
+		this.client = client;
 	}
 
 	public int getTotal() {
@@ -102,7 +99,7 @@ public class Cart implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cart [idCart=" + idCart + ", user=" + user + ", cart_items=" + cart_items + ", total=" + total
+		return "Cart [idCart=" + idCart + ", user=" + client + ", cart_items=" + cart_items + ", total=" + total
 				+ ", active=" + active + "]";
 	}
 	

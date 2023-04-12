@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nttlab.springboot.models.dao.iUserDAO;
-import com.nttlab.springboot.models.entity.User;
+import com.nttlab.springboot.models.entity.Client;
 
 @Service
 public class UserServiceImplement implements iUserService{
@@ -16,19 +16,19 @@ public class UserServiceImplement implements iUserService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<User> findAll() {
-		return (List<User>) userDao.findAll();
+	public List<Client> findAll() {
+		return (List<Client>) userDao.findAll();
 	}
 
 	@Override
 	@Transactional()
-	public void save(User user) {
-		userDao.save(user);
+	public void save(Client client) {
+		userDao.save(client);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public User findOne(Long id) {
+	public Client findOne(Long id) {
 		return userDao.findById(id).orElse(null);
 	}
 
@@ -46,8 +46,8 @@ public class UserServiceImplement implements iUserService{
 
 	@Override
 	@Transactional()
-	public User findByRut(String rut) {
-		User a = userDao.findByRut(rut);
+	public Client findByRut(String rut) {
+		Client a = userDao.findByRut(rut);
 		if(a != null) {
 			return a;
 		}
@@ -56,19 +56,30 @@ public class UserServiceImplement implements iUserService{
 	
 	@Override
 	@Transactional()
-	public User findByEmail(String email) {
-		User a = userDao.findByEmail(email);
+	public Client findByEmail(String email) {
+		Client a = userDao.findByEmail(email);
 		if(a != null) {
 			return a;
 		}
 		return null;
 	}
 	
+	@Override
+	@Transactional()
+	public Client findByName(String name) {
+		Client a = userDao.findByName(name);
+		if(a != null) {
+			return a;
+		}
+		return null;
+	}
 
 	@Override
 	@Transactional()
-	public List<User> findByApellido(String lastName) {
+	public List<Client> findByApellido(String lastName) {
 		return userDao.findBylastName(lastName);
 	}
+	
+	
 
 }
