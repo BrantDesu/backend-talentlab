@@ -8,7 +8,7 @@ import com.nttlab.springboot.models.entity.Client;
 
 public interface iUserDAO extends CrudRepository<Client, Long>{
 
-	@Query("select u from User u where u.rut like %?1%")
+	@Query("select u from Client u where u.rut like %?1%")
 	public Client findByRut(String rut);
 	
 	public Client findByEmail(String email);
