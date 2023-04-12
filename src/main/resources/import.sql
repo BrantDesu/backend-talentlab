@@ -2,3 +2,5 @@ insert into clients (name, last_name, rut, email, authority, password) values ('
 insert into carts (active, total, id_user) values (true, 0, 1)
 insert into products (name, category, price, stock) values ('Zelda', 'Aventura', 69000, 20)
 insert into products (name, category, price, stock) values ('Final Fantasy XVI', 'RPG', 79000, 5)
+insert into products (name, category, price, stock) values ('Resident Evil IV', 'Acción', 50000, 10)
+insert into products (name, category, price, stock) values ('Counter-Strike: Global Offensive 2', 'First Person Shooter', 100000, 1)
