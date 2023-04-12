@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.nttlab.springboot.models.dao.iUserDAO;
+import com.nttlab.springboot.models.dao.iClientDAO;
 import com.nttlab.springboot.models.entity.Client;
 
 import jakarta.transaction.Transactional;
@@ -25,7 +25,7 @@ import jakarta.transaction.Transactional;
 public class JpaUserDetailService implements UserDetailsService{
 
 	@Autowired
-	private iUserDAO userDao;
+	private iClientDAO userDao;
 	
 	private Logger logger = LoggerFactory.getLogger(JpaUserDetailService.class);
 	

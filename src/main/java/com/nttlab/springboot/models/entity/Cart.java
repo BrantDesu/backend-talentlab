@@ -23,7 +23,7 @@ public class Cart implements Serializable{
 	private Long idCart;
 	
 	@OneToOne//(mappedBy = "cart", cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_client")
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
 	
@@ -60,7 +60,7 @@ public class Cart implements Serializable{
 		this.active = active;
 	}
 
-	public Client getUser() {
+	public Client getClient() {
 		return client;
 	}
 
@@ -99,7 +99,7 @@ public class Cart implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cart [idCart=" + idCart + ", user=" + client + ", cart_items=" + cart_items + ", total=" + total
+		return "Cart [idCart=" + idCart + ", client=" + client + ", cart_items=" + cart_items + ", total=" + total
 				+ ", active=" + active + "]";
 	}
 	

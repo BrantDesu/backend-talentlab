@@ -11,7 +11,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nttlab.springboot.models.entity.Client;
-import com.nttlab.springboot.models.service.iUserService;
+import com.nttlab.springboot.models.service.iClientService;
 
 import jakarta.validation.Valid;
 
@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 public class UserController {
 	
 	@Autowired
-	private iUserService userService;
+	private iClientService userService;
 
 	@GetMapping(value= "/user/list")
 	public String ProductList(Model model) {
@@ -46,7 +46,7 @@ public class UserController {
 		}
 		
 		
-		if(client.getIdUser() != null) {
+		if(client.getidClient() != null) {
 			userService.save(client);
 			return "redirect:/user/list";			
 		}

@@ -29,7 +29,7 @@ public class Sale implements Serializable {
 	
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="user_id", nullable = false)
+	@JoinColumn(name="client_id", nullable = false)
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
 	
@@ -59,7 +59,7 @@ public class Sale implements Serializable {
 		return idSale;
 	}
 
-	public Client getUser() {
+	public Client getClient() {
 		return client;
 	}
 

@@ -30,7 +30,7 @@ public class Client implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idUser;
+	private Long idClient;
 	
 	@OneToOne
 	@JoinColumn(name = "id_cart")
@@ -93,12 +93,12 @@ public class Client implements Serializable {
 		this.password = password;
 	}
 
-	public Long getIdUser() {
-		return idUser;
+	public Long getidClient() {
+		return idClient;
 	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setidClient(Long idUser) {
+		this.idClient = idUser;
 	}
 
 	public String getName() {
@@ -165,7 +165,7 @@ public class Client implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Client [idUser=" + idUser + ", cart=" + cart + ", rut=" + rut + ", name=" + name + ", lastName="
+		return "Client [idClient=" + idClient + ", cart=" + cart + ", rut=" + rut + ", name=" + name + ", lastName="
 				+ lastName + ", authority=" + authority + ", email=" + email + ", password=" + password + ", createdAt="
 				+ createdAt + "]";
 	}

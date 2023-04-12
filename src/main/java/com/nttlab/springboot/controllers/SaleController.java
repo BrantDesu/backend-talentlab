@@ -19,7 +19,7 @@ import com.nttlab.springboot.models.entity.Sale;
 import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.service.iCartService;
 import com.nttlab.springboot.models.service.iSaleService;
-import com.nttlab.springboot.models.service.iUserService;
+import com.nttlab.springboot.models.service.iClientService;
 
 import jakarta.validation.Valid;
 
@@ -33,12 +33,12 @@ public class SaleController {
 	private iCartService cartService;
 	
 	@Autowired
-	private iUserService userService;
+	private iClientService clientService;
 	
 	@PostMapping(value = { "/sale/create" })
 	public String saveSale(@RequestParam Long cart_id, Model model) {
 		Cart cart = cartService.findOne(cart_id);
-        Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
+        Sale sale = new Sale(cart.getClient(), cart, cart.calculateCartTotal());
 //        List<CartItem> ci = cart.getCart_items();
 //        for (CartItem cartItem : ci) {
 //			System.out.println(cartItem.getTotal() * cartItem.getQuantity());

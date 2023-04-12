@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.nttlab.springboot.models.entity.Client;
 
 @Repository
-public interface iUserService {
+public interface iClientService {
 	
 	public List<Client> findAll();
 	
