@@ -53,4 +53,13 @@ public class ProductServiceImplement implements iProductService{
 		}
 		return null;
 	}
+
+	@Override
+	public List<Product> findByCategory(String category) {
+		List<Product> p = productDao.findByCategory(category);
+		if(!p.isEmpty()) {
+			return p;
+		}
+		return null;
+	}
 }
