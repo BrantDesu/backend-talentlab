@@ -24,6 +24,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PDFGenerator {
 
     public static ResponseEntity<InputStreamResource> generatePDF(Sale sale)  {
+	//public static ResponseEntity<InputStreamResource> generatePDF(Sale sale, ByteArrayOutputStream out)  {
     	List<CartItem> cartItems = sale.getCart().getCart_items();
     	double total = sale.getTotal();
 
@@ -86,7 +87,6 @@ public class PDFGenerator {
             totalTable.addCell(totalCell);
 
             PdfWriter.getInstance(document, out);
-            /*PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\ecespede\\git\\backend-talentlab\\src\\main\\resources\\boletas\\boleta.pdf")); new FileOutputStream(path + "\\abcd123.pdf")*/
             
             document.open();
             document.add(new Paragraph("Detalle de la orden"));
@@ -94,19 +94,21 @@ public class PDFGenerator {
             document.add(totalTable);
             document.close();
             
-         // Crear un objeto InputStreamResource para enviar el archivo PDF como respuesta
+            // Crear un objeto InputStreamResource para enviar el archivo PDF como respuesta
             InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
 
             // Configurar los encabezados de la respuesta HTTP para descargar el archivo PDF
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", "attachment; filename=ejemplo.pdf");
+            headers.add("Content-Disposition", "attachment; filename=boleta.pdf");
 
-            // Crear la respuesta HTTP con el archivo PDF
+            //Crear la respuesta HTTP con el archivo PDF
             return ResponseEntity.ok()
                     .headers(headers)
                     .contentLength(out.size())
                     .contentType(MediaType.APPLICATION_PDF)
                     .body(resource);
+            //return out.toByteArray();
+            
 
         } catch (DocumentException ex) {
 
@@ -114,5 +116,6 @@ public class PDFGenerator {
         }
 
         return null;
+        
     }
 }

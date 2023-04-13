@@ -1,12 +1,10 @@
 package com.nttlab.springboot.controllers;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,15 +13,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.nttlab.springboot.models.entity.Cart;
 import com.nttlab.springboot.models.entity.Sale;
 import com.nttlab.springboot.models.service.iCartService;
 import com.nttlab.springboot.models.service.iSaleService;
 import com.nttlab.springboot.models.service.iUserService;
 
-import jakarta.validation.Valid;
 
 import com.nttlab.springboot.models.entity.PDFGenerator;
 
@@ -62,27 +62,18 @@ public class SaleController {
 	    
 	}
 	
-	
 
-	/*@GetMapping(value={"/sale/download"})
-	public ResponseEntity<InputStreamResource> downloadPdf(@RequestParam Long sale_id) throws IOException, FileNotFoundException, DocumentException {
+	@GetMapping(value={"/sale/view/{sale_id}"})
+	public String viewSale(@PathVariable (name="sale_id") Long sale_id, Model model) throws DocumentException {
 	    Sale sale = saleService.findOne(sale_id);
-	    PDFGenerator pdfGenerator = new PDFGenerator();
-	    ByteArrayInputStream bis = pdfGenerator.generatePDF(sale);
-
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.add("Content-Disposition", "attachment; filename=boleta.pdf");
-
-	    InputStreamResource isr = new InputStreamResource(bis);
-
-	    return ResponseEntity.ok()
-	            .headers(headers)
-	            .contentType(MediaType.APPLICATION_PDF)
-	            .body(isr);
-	}*/
-
-	
-	
+	    model.addAttribute("sale", sale);
+	    ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    Document document = new Document();
+	    PdfWriter.getInstance(document, out);
+	    InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
+	    return resource.getDescription();
+	    //return "sale-view";
+	}
 
 	
 }
