@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.nttlab.springboot.util.validator.ValidatorRut;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -35,11 +36,12 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUser;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cart")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
-
+	
+	@ValidatorRut(message = "El rut ingresado no es válido")
 	@Column(name = "rut", unique = true)
 	@NotEmpty
 	private String rut;
@@ -50,19 +52,20 @@ public class Client implements Serializable {
 	private String name;
 
 	@Column(name = "last_name")
-	@NotEmpty
+	@NotEmpty(message = "El apellido es requerido")
 	@Size(min = 2, max = 50)
 	private String lastName;
 	
 	@Column(name = "authority")
 	private String authority;
 
-	@Email
-	@NotEmpty
+	@Email(message = "Formato ingresado no es válido")
+	@NotEmpty(message = "Este campo debe ser ingresado")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@Column(length = 255)
-	@NotEmpty
+	@NotEmpty(message = "Este campo debe ser ingresado")
 	private String password;
 	
 	

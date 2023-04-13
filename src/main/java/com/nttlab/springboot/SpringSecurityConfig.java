@@ -66,6 +66,7 @@ public class SpringSecurityConfig {
 			.requestMatchers("/user/**").hasRole("ADMIN")
 			.requestMatchers("/sale/**").hasRole("ADMIN")
 			.requestMatchers("/product/**").hasRole("ADMIN")
+			.requestMatchers("/signup").permitAll()
 			.anyRequest().authenticated()
 			.and()
 				.formLogin()
