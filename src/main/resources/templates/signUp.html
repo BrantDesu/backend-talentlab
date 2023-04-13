@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container mt-4">
+		<div class="col-md-6 shadow border mx-auto">
+			<div class="card border-primary text-center">
+				<div class="card-header">
+					<h3 class="card-title">Complete el formulario de registro</h3>
+				</div>
+				<div class="card-body">
+					<form th:action="@{/signup}" th:object="${client}" method="post">
+					    <div class="form-group mb-3 col-sm">
+							<input th:field="*{email}" type="text" name="email" id="email" class="form-control" placeholder="Correo" required autofocus/>
+						</div>
+						<div class="form-group mb-3 col-sm">
+							<input th:field="*{rut}" type="text" name="rut" id="rut" class="form-control" placeholder="Rut" required autofocus/>
+						</div>
+						<div class="form-group mb-3 col-sm">
+							<input th:field="*{name}" type="text" name="username" id="username" class="form-control" placeholder="Nombre" required autofocus/>
+						</div>
+						<div class="form-group mb-3 col-sm">
+							<input th:field="*{lastName}" type="text" name="lastName" id="lastName" class="form-control" placeholder="Apellido" required autofocus/>
+						</div>
+						<div class="form-group mb-3 col-sm">
+							<input th:field="*{password}"type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required />
+						</div>
+						
+						<div class="form-group mb-3 col-sm">
+							<input type="submit" value="Sign in" class="btn btn-primary btn-lg btn-block" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

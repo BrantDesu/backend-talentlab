@@ -22,7 +22,7 @@ public class Cart implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCart;
 	
-	@OneToOne//(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "cart")
 	@JoinColumn(name = "id_user")
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
