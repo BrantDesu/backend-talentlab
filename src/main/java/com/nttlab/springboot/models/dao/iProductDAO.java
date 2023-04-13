@@ -16,4 +16,7 @@ public interface iProductDAO extends CrudRepository<Product, Long> {
 	@Query("select p from Product p where p.category like %?1%")
 	public List<Product> findByCategory(String category);
 	
+	@Query("select p from Product p where p.idProduct like %?1%")
+	public Product findByIdProduct(String idProduct);
+	
 }

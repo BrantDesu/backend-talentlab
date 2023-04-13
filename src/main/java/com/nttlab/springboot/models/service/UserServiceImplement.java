@@ -22,8 +22,8 @@ public class UserServiceImplement implements iUserService{
 
 	@Override
 	@Transactional()
-	public void save(Client client) {
-		userDao.save(client);
+	public Client save(Client client) {
+		return userDao.save(client);
 	}
 
 	@Override

@@ -2,6 +2,9 @@ package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +28,7 @@ public class CartItem implements Serializable {
 	
 	@ManyToOne
 	//@JoinColumn(name="cart_id", nullable = false)
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 	
 	@OneToOne(fetch = FetchType.LAZY, optional = false)

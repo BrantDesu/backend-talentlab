@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +37,7 @@ public class Client implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name = "id_cart")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 
 	@Column(name = "rut", unique = true)
@@ -80,11 +83,10 @@ public class Client implements Serializable {
 	
 	
 
-	public Client(Cart cart, @NotEmpty String rut, @NotEmpty @Size(min = 2, max = 50) String name,
+	public Client(@NotEmpty String rut, @NotEmpty @Size(min = 2, max = 50) String name,
 			@NotEmpty @Size(min = 2, max = 50) String lastName, String authority, @Email @NotEmpty String email,
 			@NotEmpty String password) {
 		super();
-		this.cart = cart;
 		this.rut = rut;
 		this.name = name;
 		this.lastName = lastName;
