@@ -22,20 +22,20 @@ public class ProductServiceImplement implements iProductService{
 
 	@Override
 	@Transactional
-	public void save(Product product) {
-		productDao.save(product);
+	public Product save(Product product) {
+		return productDao.save(product);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Product findOne(Long id) {
-		return productDao.findById(id).orElse(null);
+	public Product findOne(Long id_product) {
+		return productDao.findById(id_product).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
-		productDao.deleteById(id);
+	public void delete(Long id_product) {
+		productDao.deleteById(id_product);
 	}
 
 	@Override
@@ -62,4 +62,11 @@ public class ProductServiceImplement implements iProductService{
 		}
 		return null;
 	}
+
+	@Override
+	public Product findByIdProduct(String id_product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

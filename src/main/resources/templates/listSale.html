@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<main>
+		  <div class="container mt-4 table-responsive">
+			<div class="row mt-4">
+				<h1 class="text-primary" th:text="${title}"></h1>
+				<!--<div class="col-sm-2">
+					<a class="btn btn-outline-primary" th:href="@{/sale/new}">Crear nuevo</a>
+				</div>-->
+			</div>
+			<div class="row mt-4">
+				<div th:if="${sales.isEmpty()}" class="alert alert-primary"
+					role="alert">No hay Ventas en la lista para mostrar...</div>
+				<table th:if="${!sales.isEmpty()}"
+					class="table table-bordered table-striped">
+					<thead class="table-dark">
+						<tr>
+							<th>ID SALE</th>
+							<th>ID USER</th>
+							<th>ID CART</th>
+							<th>TOTAL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p: ${sales}">
+							<td th:text="${p.idSale}"></td>
+							<td th:text="${p.user_id}"></td>
+							<td th:text="${p.cart_id}"></td>
+							<td th:text="${p.total}"></td>
+							<!-- <td>
+								<a class="btn btn-outline-warning" th:href="@{/sale/edit/} + ${p.idSale}">
+									<span class="fs-5">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</span>
+								</a>
+								<a class="btn btn-outline-danger" th:href="@{/sale/delete/} + ${p.idSale}" onclick="return confirm('Estas seguro que deseas eliminar la venta. Estas acción no se puede deshacer?');">
+									<span class="fs-5">
+										<i class="fa-solid fa-trash-can"></i>
+									</span>
+								</a>
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+     </main>
+
+<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

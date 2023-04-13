@@ -35,9 +35,13 @@ public class SaleController {
 
 	@Autowired
 	private iCartService cartService;
-
-	@Autowired
-	private iUserService userService;
+	
+	@GetMapping(value= "/sale/list")
+	public String SalesList(Model model) {
+		model.addAttribute("title","Listado de Ventas");
+		model.addAttribute("sales", saleService.findAll());
+		return "listSale";
+	}
 
 	@PostMapping(value = { "/sale/create" })
 	public String saveSale(@RequestParam Long cart_id, Model model)  {

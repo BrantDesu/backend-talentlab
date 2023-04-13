@@ -10,15 +10,19 @@ import java.util.List;
 public interface iProductService {
 	public List<Product> findAll();
 	
-	public void save(Product product);
+	public Product save(Product product);
 	
-	public Product findOne(Long id);
+	public Product findOne(Long id_product);
 	
-	public void delete(Long id);
+	public Product findByIdProduct(String id_product);
+	
+	public void delete(Long id_product);
 	
 	public void deleteAll();
 	
 	public List<Product> findByName(String name);
 	
 	public List<Product> findByCategory(String category);
+
+
 }

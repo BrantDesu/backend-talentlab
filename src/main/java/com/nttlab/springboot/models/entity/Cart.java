@@ -2,6 +2,10 @@ package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,14 +26,14 @@ public class Cart implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCart;
 	
-	@OneToOne//(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "cart")
 	@JoinColumn(name = "id_user")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
 	
 	@OneToMany(mappedBy = "cart")
 	//@JoinColumn(name = "id_user")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<CartItem> cart_items;
 	
 	public List<CartItem> getCart_items() {

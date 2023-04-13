@@ -22,16 +22,16 @@ public class UserController {
 	private iUserService userService;
 
 	@GetMapping(value= "/user/list")
-	public String ProductList(Model model) {
+	public String UserList(Model model) {
 		model.addAttribute("title","Listado de Usuarios");
-		model.addAttribute("users", userService.findAll());
+		model.addAttribute("clients", userService.findAll());
 		return "listUser";
 	}
 	
 	@GetMapping(value = "/user/new")
 	public String crearUser(Model model) {
 		Client client = new Client();
-		model.addAttribute("user", client);
+		model.addAttribute("client", client);
 		model.addAttribute("title", "Formulario Creación usuario");
 		return "formUser";
 	}
@@ -78,7 +78,7 @@ public class UserController {
 				return "redirect:/user/list";
 			}
 			else {
-				model.addAttribute("user", client);
+				model.addAttribute("client", client);
 				model.addAttribute("titulo", "Formulario Edición usuario ");
 				return "formUser";
 			}
