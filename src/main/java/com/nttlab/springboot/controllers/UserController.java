@@ -22,7 +22,7 @@ public class UserController {
 	private iUserService userService;
 
 	@GetMapping(value= "/user/list")
-	public String ProductList(Model model) {
+	public String UserList(Model model) {
 		model.addAttribute("title","Listado de Usuarios");
 		model.addAttribute("clients", userService.findAll());
 		return "listUser";
