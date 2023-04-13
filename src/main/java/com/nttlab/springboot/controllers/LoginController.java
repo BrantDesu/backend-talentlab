@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +64,18 @@ public class LoginController {
 		
 	}
 	
+	@PostMapping(value="/signup")
+	public String signUp(@ModelAttribute("client") Client client)
+	{
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(client.getPassword());
+		//crear el cliente con las variables de la clase Client. antes de, crear un carrito
+		client.setAuthority("ROLE_USER");
+		client.setPassword(encodedPassword);
+		client.setCart(new Cart(client));
+		clientService.save(client);
+		return "login";
+	}
 //	@PostMapping(value= "/client")
 //	public ResponseEntity<?> createClient(@RequestBody Client client){
 //		Client new_client = null;
@@ -104,19 +117,5 @@ public class LoginController {
 //		}
 //	}
 	
-	@PostMapping(value="/signup")
-	public String signUp(@Valid Client client, @RequestBody String password)
-	{
-		System.out.println("holaaa");
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPassword = encoder.encode(password);
-		//crear el cliente con las variables de la clase Client. antes de, crear un carrito
-		client.setAuthority("ROLE_USER");
-		client.setPassword(encodedPassword);
-		Cart cart = new Cart(client);
-		client.setCart(cart);
-		clientService.save(client);
-		return "home";
-	}
 
 }
