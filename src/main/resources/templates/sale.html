@@ -7,5 +7,11 @@
 		
 	</header>
 	
+	<!--   <form th:action="@{/sale/download}" th:object="${sale}" method = "POST">
+	
+	</form> -->
+	<a th:href="@{'/sale/download/'+${sale.idSale}}">Descargar boleta</a>
+	
+	
 </body>
 </html>
