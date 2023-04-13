@@ -11,7 +11,7 @@ public interface iUserService {
 	
 	public List<Client> findAll();
 	
-	public void save(Client client);
+	public Client save(Client client);
 	
 	public Client findOne(Long id);
 	

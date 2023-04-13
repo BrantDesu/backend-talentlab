@@ -86,6 +86,13 @@ public class Sale implements Serializable {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "Sale [idSale=" + idSale + ", client=" + client + ", cart=" + cart + ", createdAt=" + createdAt
+				+ ", total=" + total + "]";
+	}
+	
 	
 	
 	

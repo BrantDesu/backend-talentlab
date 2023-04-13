@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.nttlab.springboot.util.validator.ValidatorRut;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,7 +38,7 @@ public class Client implements Serializable {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cart")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 	
 	@ValidatorRut(message = "El rut ingresado no es válido")

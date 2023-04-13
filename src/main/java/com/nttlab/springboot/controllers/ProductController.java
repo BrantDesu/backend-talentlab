@@ -77,7 +77,7 @@ public class ProductController {
 			}
 			else {
 				model.addAttribute("product", product);
-				model.addAttribute("titulo", "Formulario Edición producto");
+				model.addAttribute("title", "Formulario Edición producto");
 				return "formProduct";
 			}
 		}
@@ -108,23 +108,4 @@ public class ProductController {
 
 	}
 	
-	@GetMapping(value= "/product/search")
-	public String ProductList(
-			@RequestParam(value="filter") String filter,
-			@RequestParam(value="text") String text,
-			Model model
-		) 
-	{
-		List<Product> products = null;
-		if (filter == "name") {
-			products = productService.findByName(text);
-		}
-		else {
-			products = productService.findByCategory(text);
-		}
-		model.addAttribute("title","Listado de Productos");
-		model.addAttribute("products", products);
-		return "listProduct";
-	}
-
 }
