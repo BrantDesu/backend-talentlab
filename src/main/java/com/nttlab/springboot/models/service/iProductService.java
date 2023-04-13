@@ -12,9 +12,11 @@ public interface iProductService {
 	
 	public Product save(Product product);
 	
-	public Product findOne(Long id);
+	public Product findOne(Long id_product);
 	
-	public void delete(Long id);
+	public Product findByIdProduct(String id_product);
+	
+	public void delete(Long id_product);
 	
 	public void deleteAll();
 	

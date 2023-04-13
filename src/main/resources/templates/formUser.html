@@ -47,6 +47,13 @@
 						</div>
 					</div>
 					<div class="mb-3 row">
+						<label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+						<div class="col-sm-10">
+							<input th:field="*{password}" type="text" class="form-control">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+						</div>
+					</div>
+					<div class="mb-3 row">
 						<label for="authority" class="col-sm-2 col-form-label">Rol</label>
 						<div class="col-sm-10">
 							<input th:field="*{authority}" type="text" class="form-control">

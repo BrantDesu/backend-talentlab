@@ -7,11 +7,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.sql.init.dependency.DependsOnDatabaseInitialization;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.DependsOn;
 
 import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.entity.Product;
-import com.nttlab.springboot.models.entity.Cart;
 import com.nttlab.springboot.models.service.iProductService;
 import com.nttlab.springboot.models.service.iUserService;
 
@@ -45,6 +46,7 @@ class BackendEntregaG3ApplicationTests {
 	
 	
 	@Test
+	@DependsOn("findClient")
 	void deleteClients() throws ParseException{
 		
 		clientService.deleteAll();
@@ -53,6 +55,20 @@ class BackendEntregaG3ApplicationTests {
 		assertThat(client.size() == 0);
 		
 	}
+	
+	
+	@Test
+	void findProduct() throws ParseException{	
+		
+		Product product = new Product("Metroid Prime", 39990, "Aventura/FPS", 25);
+		
+		Product nuevo = productService.save(product);
+		
+		Product find = productService.findOne(nuevo.getIdProduct());
+		
+		assertThat(find.getName().equals("Metroid Prime") && find.getCategory().equals("Aventura/FPS") );
+	}
+	
 	
 	
 	@Test
@@ -65,17 +81,10 @@ class BackendEntregaG3ApplicationTests {
 		assertThat(nuevo.getName().equals("Zelda: Tears Of The Kingdom") && nuevo.getCategory().equals("Aventura") );
 	}
 	
-	@Test
-	void findProduct() throws ParseException{
-		
-		
-		Product find = productService.findOne((long)1);
-		
-		assertThat(find.getName().equals("Zelda") && find.getCategory().equals("Aventura") );
-	}
-	
+
 	
 	@Test
+	@DependsOn("findProduct")
 	void deleteProduct() throws ParseException{
 		
 		productService.deleteAll();
@@ -84,7 +93,6 @@ class BackendEntregaG3ApplicationTests {
 		assertThat(product.size() == 0);
 		
 	}
-	
 	
 
 }
