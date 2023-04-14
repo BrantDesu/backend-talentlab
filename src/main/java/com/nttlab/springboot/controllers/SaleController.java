@@ -74,7 +74,7 @@ public class SaleController {
 	
 	@GetMapping(value={"/sale/download/{sale_id}"})
 	public ResponseEntity<InputStreamResource> downloadPdf(@PathVariable (name="sale_id") Long sale_id) {
-		System.out.println("llegue");
+		
 		Sale sale = saleService.findOne(sale_id);
 		PDFGenerator pdfGenerator = new PDFGenerator();
 	    return pdfGenerator.generatePDF(sale);
@@ -82,17 +82,6 @@ public class SaleController {
 	}
 	
 
-	@GetMapping(value={"/sale/view/{sale_id}"})
-	public String viewSale(@PathVariable (name="sale_id") Long sale_id, Model model) throws DocumentException {
-	    Sale sale = saleService.findOne(sale_id);
-	    model.addAttribute("sale", sale);
-	    ByteArrayOutputStream out = new ByteArrayOutputStream();
-	    Document document = new Document();
-	    PdfWriter.getInstance(document, out);
-	    InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
-	    return resource.getDescription();
-	    //return "sale-view";
-	}
 
 	
 }

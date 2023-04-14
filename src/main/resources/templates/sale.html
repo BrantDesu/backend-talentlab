@@ -9,8 +9,33 @@
 	<div class="container" style="width: 18rem; margin-top: 50px;">
 		<div class="card-body">
 			<h5 class="card-title">DETALLE DE COMPRA</h5>
-			<p th:href="@{'/sale/view/'+${sale.idSale}}" class="card-text">With supporting text below as a natural
-				lead-in to additional content.</p>
+				
+				<div class="row mt-4">
+				<div th:if="${sale.cart.cart_items.isEmpty()}" class="alert alert-primary"
+					role="alert">No hay Productos en la lista para mostrar...</div>
+				<table th:if="${!sale.cart.cart_items.isEmpty()}"
+					class="table table-bordered table-striped">
+					<thead class="table-dark">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Categoria</th>
+							<th>Precio</th>
+							<th>Cantidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p: ${sale.cart.cart_items}">
+							<td th:text="${p.product.idProduct}"></td>
+							<td th:text="${p.product.name}"></td>
+							<td th:text="${p.product.category}"></td>
+							<td th:text="${p.product.price}"></td>
+							<td th:text="${p.quantity}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+				
 				
 				
 			<a th:href="@{'/sale/download/'+${sale.idSale}}"
@@ -18,8 +43,6 @@
 		</div>
 	</div>
 
-
-	<!--   <button th:href="@{'/sale/download/'+${sale.idSale}}">Descargar boleta</button> -->
 
 
 </body>

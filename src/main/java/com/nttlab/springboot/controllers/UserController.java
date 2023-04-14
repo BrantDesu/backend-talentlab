@@ -81,7 +81,9 @@ public class UserController {
 				model.addAttribute("client", client);
 				model.addAttribute("titulo", "Formulario Edición usuario ");
 				return "formUser";
+				
 			}
+			
 		}
 		else
 		{
@@ -89,6 +91,8 @@ public class UserController {
 			flash.addFlashAttribute("error", "Debes ingresar un valor mayor a 0(cero)!!!");
 			return "redirect:/user/list";
 		}
+		
+		
 	}
 	
 	
