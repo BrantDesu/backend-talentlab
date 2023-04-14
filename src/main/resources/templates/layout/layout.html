@@ -40,11 +40,11 @@
 							<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/product/list}">Lista de Productos</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart}">Carrito</a>
+							<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/sale/list}">Lista de Ventas</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/sale/list}">Venta</a>
-						</li>
+							<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart}">Carrito</a>
+						</li>		
 					</ul>
 					
 					<ul class="navbar-nav d-flex ms-auto">

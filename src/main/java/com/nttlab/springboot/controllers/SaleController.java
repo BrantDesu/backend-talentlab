@@ -52,8 +52,7 @@ public class SaleController {
 	public String saveSale(@PathVariable Long cart_id, Model model, 
 			@RequestParam(value="error",required = false) String error){
 	    Cart cart = cartService.findOne(cart_id);
-	    
-	    if(cart.getCart_items() == null) {
+
 		    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
 		    Client client = sale.getUser();
 		    cart.setActive(false);
@@ -64,10 +63,7 @@ public class SaleController {
 		    model.addAttribute("titulo", "Sale");
 		    model.addAttribute("sale", sale);
 		    return "sale";
-	    }else {
-	    	model.addAttribute("info","Carro vacio");
-			return "redirect:/cart";
-	    }
+
 	}
 	
 	

@@ -29,8 +29,8 @@
 					<tbody>
 						<tr th:each="p: ${sales}">
 							<td th:text="${p.idSale}"></td>
-							<td th:text="${p.user_id}"></td>
-							<td th:text="${p.cart_id}"></td>
+							<td th:text="${p.user.idUser}"></td>
+							<td th:text="${p.cart.idCart}"></td>
 							<td th:text="${p.total}"></td>
 							<!-- <td>
 								<a class="btn btn-outline-warning" th:href="@{/sale/edit/} + ${p.idSale}">
