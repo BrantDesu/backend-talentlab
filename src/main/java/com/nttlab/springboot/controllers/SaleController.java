@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -48,18 +49,25 @@ public class SaleController {
 	}
 
 	@PostMapping(value = "/sale/create/{cart_id}")
-	public String saveSale(@PathVariable Long cart_id, Model model){
+	public String saveSale(@PathVariable Long cart_id, Model model, 
+			@RequestParam(value="error",required = false) String error){
 	    Cart cart = cartService.findOne(cart_id);
-	    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
-	    Client client = sale.getUser();
-	    cart.setActive(false);
-	    cart.setUser(null);
-		client.setCart(new Cart(client));
-		clientService.save(client);
-	    saleService.save(sale);
-	    model.addAttribute("titulo", "Sale");
-	    model.addAttribute("sale", sale);
-	    return "sale";
+	    
+	    if(cart.getCart_items() == null) {
+		    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
+		    Client client = sale.getUser();
+		    cart.setActive(false);
+		    cart.setUser(null);
+			client.setCart(new Cart(client));
+			clientService.save(client);
+		    saleService.save(sale);
+		    model.addAttribute("titulo", "Sale");
+		    model.addAttribute("sale", sale);
+		    return "sale";
+	    }else {
+	    	model.addAttribute("info","Carro vacio");
+			return "redirect:/cart";
+	    }
 	}
 	
 	
