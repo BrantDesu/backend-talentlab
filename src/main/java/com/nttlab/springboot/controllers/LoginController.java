@@ -76,46 +76,5 @@ public class LoginController {
 		clientService.save(client);
 		return "login";
 	}
-//	@PostMapping(value= "/client")
-//	public ResponseEntity<?> createClient(@RequestBody Client client){
-//		Client new_client = null;
-//		Map<String, Object> response = new HashMap<>();
-//		try {
-//			boolean rutValido = new RutValidator().isValid(client.getRut(),null);
-//			if(!rutValido) {
-//				response.put("mensaje", "Error al realizar el registro del usuario. El rut ingresado no es válido.");
-//				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
-//			}
-//			
-//			boolean emailValido = new EmailValidator().isValid(client.getEmail(), null);
-//			if(!emailValido) {
-//				response.put("mensaje", "Error al realizar el registro del alumno. El email ingresado no es válido.");
-//				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
-//			}
-//
-//			List<Client> client = client.findAll();
-//			for(Client c: client) {
-//				if(c.getEmail().equalsIgnoreCase(client.getEmail())) {
-//					response.put("mensaje", "Error al realizar el registro del alumno. El correo indicado ya existe en nuestros registros.");
-//					return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
-//				}
-//				if(c.getRut().equalsIgnoreCase(client.getRut())) {
-//					response.put("mensaje", "Error al realizar el registro del alumno. El rut indicado ya existe en nuestros registros.");
-//					return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
-//				}
-//			}
-//			
-//			alumno_nuevo = alumnoService.save(alumno);
-//			response.put("mensaje", "Alumno registrado satisfactoriamente.");
-//			response.put("alumno", alumno_nuevo);
-//			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
-//		}
-//		catch(DataAccessException ex) {
-//			response.put("mensaje", "Error al realizar el proceso de registro de un nuevo alumno.");
-//			response.put("error", ex.getMessage() + ": " + ex.getMostSpecificCause().getMessage());
-//			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
-	
 
 }

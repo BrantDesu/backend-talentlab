@@ -1,6 +1,7 @@
 package com.nttlab.springboot.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
@@ -99,6 +100,14 @@ public class Cart implements Serializable{
 		}
 		this.total = total;
 		return total;
+	}
+	
+	public List<Long> getCartProductsIds() {
+		List<Long> products_ids = new ArrayList<>();
+		for (CartItem ci : cart_items) {
+			products_ids.add(ci.getProduct().getIdProduct());
+		}
+		return products_ids;
 	}
 
 	@Override

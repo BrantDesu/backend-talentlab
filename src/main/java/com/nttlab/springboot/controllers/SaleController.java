@@ -43,8 +43,9 @@ public class SaleController {
 		return "listSale";
 	}
 
-	@PostMapping(value = { "/sale/create" })
-	public String saveSale(@RequestParam Long cart_id, Model model)  {
+	@PostMapping(value = "/sale/create/{cart_id}")
+	public String saveSale(@PathVariable Long cart_id, Model model){
+		System.out.println("asdasda");
 	    Cart cart = cartService.findOne(cart_id);
 	    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
 

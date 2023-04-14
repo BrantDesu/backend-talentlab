@@ -27,13 +27,13 @@ public class CartItem implements Serializable {
 	private Long idCartItem;
 	
 	@ManyToOne
-	//@JoinColumn(name="cart_id", nullable = false)
+	@JoinColumn(name="cart_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="product_id")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Product product;
 	
 	@Column(name="quantity")
