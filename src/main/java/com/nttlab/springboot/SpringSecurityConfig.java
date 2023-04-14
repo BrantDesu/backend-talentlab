@@ -63,7 +63,7 @@ public class SpringSecurityConfig {
 			.requestMatchers("","/","/home","/index").hasAnyRole("USER","ADMIN")
 			.requestMatchers("/cart-item/**").hasAnyRole("USER","ADMIN")
 			.requestMatchers("/cart/**").hasAnyRole("USER","ADMIN")
-			.requestMatchers("/user/**").hasRole("ADMIN")
+			.requestMatchers("/user/**","/user/new/**").hasRole("ADMIN")
 			.requestMatchers("/sale/list/**").hasRole("ADMIN")
 			.requestMatchers("/sale/create/**", "/sale/download/**").hasAnyRole("USER","ADMIN")
 			.requestMatchers("/product/**").hasRole("ADMIN")
