@@ -2,16 +2,25 @@
 <html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"></head>
 <body>
+
+	<header th:replace="layout/layout :: header"> </header>
+
 	
-	<header th:replace="layout/layout :: header">
-		
-	</header>
-	
-	<!--   <form th:action="@{/sale/download}" th:object="${sale}" method = "POST">
-	
-	</form> -->
-	<a th:href="@{'/sale/download/'+${sale.idSale}}">Descargar boleta</a>
-	
-	
+	<div class="container" style="width: 18rem; margin-top: 50px;">
+		<div class="card-body">
+			<h5 class="card-title">DETALLE DE COMPRA</h5>
+			<p th:href="@{'/sale/view/'+${sale.idSale}}" class="card-text">With supporting text below as a natural
+				lead-in to additional content.</p>
+				
+				
+			<a th:href="@{'/sale/download/'+${sale.idSale}}"
+				class="btn btn-primary">Descargar boleta</a>
+		</div>
+	</div>
+
+
+	<!--   <button th:href="@{'/sale/download/'+${sale.idSale}}">Descargar boleta</button> -->
+
+
 </body>
 </html>
