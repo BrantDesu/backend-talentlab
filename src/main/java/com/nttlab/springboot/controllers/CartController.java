@@ -25,14 +25,14 @@ public class CartController {
 	
 	@GetMapping(value= "/cart")
 	public String userCart(Model model) {
-		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
 			model.addAttribute("title","Carrito de Compra");
 			model.addAttribute("cart", clientService.findByEmail(currentUserName).getCart());
 			return "cart";
-		} else {
+		}
+		else {
 			return "error_404";
 		}
 	}
