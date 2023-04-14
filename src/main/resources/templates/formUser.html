@@ -39,17 +39,17 @@
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-3 row" th:hidden="${isEdit}">
 						<label for="email" class="col-sm-2 col-form-label">Email</label>
 						<div class="col-sm-10">
-							<input th:field="*{email}" type="text" class="form-control">
+							<input th:field="*{email}" class="form-control" >
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 						</div>
 					</div>
-					<div class="mb-3 row">
+					<div class="mb-3 row" th:hidden="${isEdit}">
 						<label for="password" class="col-sm-2 col-form-label">Contraseña</label>
 						<div class="col-sm-10">
-							<input th:field="*{password}" type="text" class="form-control">
+							<input th:field="*{password}" class="form-control">
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
 						</div>
 					</div>
@@ -60,7 +60,9 @@
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></small>
 						</div>
 					</div>
+					<input th:field="*{idUser}" type="hidden">
 				</div>
+				
 				<div class="card-footer text-center">
 					<div class="form-group">
 						<input type="submit" value="Guardar" class="btn btn-outline-primary" />

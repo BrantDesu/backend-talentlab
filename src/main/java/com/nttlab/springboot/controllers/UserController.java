@@ -1,6 +1,7 @@
 package com.nttlab.springboot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +40,7 @@ public class UserController {
 	@PostMapping(value = "/user/form")
 	public String guardarUser(@Valid Client client, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
-		String mensajeFlash = null;		
+		String mensajeFlash = null;
 		if(result.hasErrors()) {
 			model.addAttribute("title","Formulario Creación usuario");
 			return "formUser";
@@ -59,7 +60,9 @@ public class UserController {
 				flash.addFlashAttribute("error", "Email ya registrado en nuestro sistema");
 				return "redirect:/user/new";
 			}
-			
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String encodedPassword = encoder.encode(client.getPassword());
+			client.setPassword(encodedPassword);
 			userService.save(client);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);
@@ -79,9 +82,9 @@ public class UserController {
 			}
 			else {
 				model.addAttribute("client", client);
-				model.addAttribute("titulo", "Formulario Edición usuario ");
+				model.addAttribute("isEdit", true);
+				model.addAttribute("title", "Formulario Edición usuario ");
 				return "formUser";
-				
 			}
 			
 		}
