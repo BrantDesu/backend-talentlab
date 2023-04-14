@@ -54,7 +54,7 @@
 								<p class="card-text" th:text="'Stock: ' + ${p.stock}"></p>
 								<div class="d-flex justify-content-between align-items-center">
 									<a class="btn--bs-primary"
-										th:href="@{/cart-item/create/} + '1' + '/' + ${p.idProduct}">
+										th:href="@{/cart-item/create/} + ${p.idProduct}">
 										<span class="fs-5"> <i class="fas fa-shopping-cart"></i>
 									</span>
 									</a> <small class="text-muted" th:text=" 'Valor: $ ' + ${p.price}"></small>

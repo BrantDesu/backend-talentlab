@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itextpdf.text.DocumentException;
 import com.nttlab.springboot.models.entity.Cart;
+import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.entity.Sale;
 import com.nttlab.springboot.models.service.iCartService;
 import com.nttlab.springboot.models.service.iSaleService;
@@ -36,6 +37,9 @@ public class SaleController {
 	@Autowired
 	private iCartService cartService;
 	
+	@Autowired
+	private iUserService clientService;
+	
 	@GetMapping(value= "/sale/list")
 	public String SalesList(Model model) {
 		model.addAttribute("title","Listado de Ventas");
@@ -43,13 +47,16 @@ public class SaleController {
 		return "listSale";
 	}
 
-	@PostMapping(value = { "/sale/create" })
-	public String saveSale(@RequestParam Long cart_id, Model model)  {
+	@PostMapping(value = "/sale/create/{cart_id}")
+	public String saveSale(@PathVariable Long cart_id, Model model){
 	    Cart cart = cartService.findOne(cart_id);
 	    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
-
+	    Client client = sale.getUser();
+	    cart.setActive(false);
+	    cart.setUser(null);
+		client.setCart(new Cart(client));
+		clientService.save(client);
 	    saleService.save(sale);
-
 	    model.addAttribute("titulo", "Sale");
 	    model.addAttribute("sale", sale);
 	    return "sale";

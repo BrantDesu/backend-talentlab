@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,12 +32,12 @@ public class Sale implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="user_id", nullable = false)
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
 	
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="cart_id")
-	//@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cart cart;
 	
 	@Column(name = "created_at")
