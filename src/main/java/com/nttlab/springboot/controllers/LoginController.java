@@ -82,7 +82,7 @@ public class LoginController {
 		clientService.save(client);
 		return "login";
 	}
-	
+
 	 @ExceptionHandler(value = { ConstraintViolationException.class})
 	    public ModelAndView handleConstraintViolationException(ConstraintViolationException ex) {
 	        ModelAndView modelAndView = new ModelAndView();
@@ -101,6 +101,5 @@ public class LoginController {
 	        
 	        return modelAndView;
 	    }
-	
 
 }
