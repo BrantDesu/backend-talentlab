@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es-CL" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="~{layout/layout :: head}"></head>
 <body>
 	
-	<header th:replace="layout/layout :: header"></header>
+	<header th:replace="~{layout/layout :: header}"></header>
 
 	<div class="container mt-4">
 		<div class="col-md-6 shadow border mx-auto">
 			<div class="card border-primary text-center">
 				<div class="card-header">
-					<h3 class="card-title">Por favor inicie  dsjdsak sesión...</h3>
+					<h3 class="card-title">Por favor inicie sesión...</h3>
 				</div>
 				<div class="card-body">
 					<form th:action="@{/login}" method="post">
@@ -32,6 +32,6 @@
 		</div>
 	</div>
 
-	<footer th:replace="layout/layout :: footer"></footer>
+	<footer th:replace="~{layout/layout :: footer}"></footer>
 </body>
 </html>
