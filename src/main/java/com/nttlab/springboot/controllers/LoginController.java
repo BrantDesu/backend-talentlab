@@ -22,9 +22,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nttlab.springboot.models.entity.Cart;
 import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.service.iUserService;
+import com.nttlab.springboot.util.validator.RutValidator;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -64,12 +66,18 @@ public class LoginController {
 	}
 	
 	@PostMapping(value="/signup")
-	public String signUp(@ModelAttribute("client") Client client,BindingResult result, Model model, RedirectAttributes flash,
+	public String signUp(@Valid Client client,BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status)
 	{
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo","Formulario Creación alumno");
+			return "signUp";
+		}
+		
+		boolean rutValido = new RutValidator().isValid(client.getRut(),null);
+		if(!rutValido) {
+			flash.addFlashAttribute("danger", "Error al realizar el registro del alumno. El rut ingresado no es válido.");
 			return "signUp";
 		}
 		
@@ -82,24 +90,5 @@ public class LoginController {
 		clientService.save(client);
 		return "login";
 	}
-
-	 @ExceptionHandler(value = { ConstraintViolationException.class})
-	    public ModelAndView handleConstraintViolationException(ConstraintViolationException ex) {
-	        ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.setViewName("error");
-	        
-	        // Obtener los errores de ConstraintViolation
-	        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
-	        List<String> messages = new ArrayList<>(violations.size());
-	        
-	        for (ConstraintViolation<?> violation : violations) {
-	            messages.add(violation.getMessage());
-	        }
-	        
-	        // Agregar los errores al modelo
-	        modelAndView.addObject("errors", messages);
-	        
-	        return modelAndView;
-	    }
 
 }

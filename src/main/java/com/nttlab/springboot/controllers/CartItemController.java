@@ -48,14 +48,16 @@ public class CartItemController {
 			Cart cart = clientService.findByEmail(currentUserName).getCart();
 			int total = product.getPrice();
 			if (cart.getCartProductsIds().contains(product_id)) {
-				flash.addFlashAttribute("error", "El producto ya se encuentra en el carrito, si quieres aumentar su cantidad, dirigete a 'Carrito'.");
+				flash.addFlashAttribute("danger", "El producto ya se encuentra en el carrito, si quieres aumentar su cantidad, dirigete a 'Carrito'.");
 			} else {
 				CartItem cartItem = new CartItem(cart, product, 1, total);
+				flash.addFlashAttribute("success", "El producto ha sido añadido al carrito");
+
 				cartItemService.save(cartItem);
 			}
 			return "redirect:/";
 		} else {
-			flash.addFlashAttribute("error", "La sesión expiró");
+			flash.addFlashAttribute("danger", "La sesión expiró");
 			return "error_404";
 		}
 

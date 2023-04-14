@@ -4,7 +4,11 @@
 <body>
 	
 	<header th:replace="~{layout/layout :: header}"></header>
-
+		<div class="alert alert-danger py-5" th:object="${client}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
+		</div>
 	<div class="container mt-4">
 		<div class="col-md-6 shadow border mx-auto">
 			<div class="card border-primary text-center">
