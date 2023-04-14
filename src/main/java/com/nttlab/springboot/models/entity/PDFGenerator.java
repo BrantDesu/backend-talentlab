@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -55,7 +56,7 @@ public class PDFGenerator {
 
                 PdfPCell cell;
 
-                cell = new PdfPCell(new Paragraph(String.valueOf(item.getIdCartItem())));
+                cell = new PdfPCell(new Paragraph(String.valueOf(item.getProduct().getIdProduct())));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
@@ -89,10 +90,13 @@ public class PDFGenerator {
             PdfWriter.getInstance(document, out);
             
             document.open();
-            document.add(new Paragraph("Detalle de la orden"));
+            document.add(new Paragraph("Detalle de la orden numero: " + sale.getIdSale()));
+            document.add(new Chunk());
             document.add(table);
             document.add(totalTable);
             document.close();
+            
+            
             
             // Crear un objeto InputStreamResource para enviar el archivo PDF como respuesta
             InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));

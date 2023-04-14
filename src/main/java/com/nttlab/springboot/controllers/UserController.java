@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nttlab.springboot.models.entity.Cart;
 import com.nttlab.springboot.models.entity.Client;
 import com.nttlab.springboot.models.service.iUserService;
 
@@ -63,6 +64,8 @@ public class UserController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedPassword = encoder.encode(client.getPassword());
 			client.setPassword(encodedPassword);
+			Cart cart = new Cart(client);
+			client.setCart(cart);
 			userService.save(client);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensajeFlash);

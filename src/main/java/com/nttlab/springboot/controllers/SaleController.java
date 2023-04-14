@@ -49,20 +49,23 @@ public class SaleController {
 	}
 
 	@PostMapping(value = "/sale/create/{cart_id}")
-	public String saveSale(@PathVariable Long cart_id, Model model, 
-			@RequestParam(value="error",required = false) String error){
+	public String saveSale(@PathVariable Long cart_id, Model model, @RequestParam(value="error",required = false) String error, RedirectAttributes flash){
 	    Cart cart = cartService.findOne(cart_id);
+	    if (cart.getCart_items().isEmpty()) {
+	    	flash.addFlashAttribute("danger", "El carro de compras está vacío... intenta agregar algún producto.");
+	    	return "redirect:/home";
+		}
 
-		    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
-		    Client client = sale.getUser();
-		    cart.setActive(false);
-		    cart.setUser(null);
-			client.setCart(new Cart(client));
-			clientService.save(client);
-		    saleService.save(sale);
-		    model.addAttribute("titulo", "Sale");
-		    model.addAttribute("sale", sale);
-		    return "sale";
+	    Sale sale = new Sale(cart.getUser(), cart, cart.calculateCartTotal());
+	    Client client = sale.getUser();
+	    cart.setActive(false);
+	    cart.setUser(null);
+		client.setCart(new Cart(client));
+		clientService.save(client);
+	    saleService.save(sale);
+	    model.addAttribute("titulo", "Sale");
+	    model.addAttribute("sale", sale);
+	    return "sale";
 
 	}
 	
